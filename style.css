@@ -9,11 +9,11 @@ body {
 .calculator {
   background-color: #ADD8E6;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 3px;
   padding: 5px;
   border-radius: 10px;
-  max-width: 450px;
+  max-width: 750px;
   margin: 0 auto;
   position: relative;
   top: 50%;
@@ -56,9 +56,9 @@ body {
 .btn_color {
   background-color: #4682B4;
 }
-.delete {
+/* .delete {
   grid-column: 2/-2;
-}
+} */
 .zero {
   grid-column: 1/3;
 }
