@@ -89,12 +89,14 @@ class Calculator {
     historyCalc.className = "historyCalc";
     historyAll.appendChild(historyCalc);
     historyCalc.innerHTML += this.historyText + ' = ' + resultat;
+    arr = arr + arr.push(historyCalc.innerHTM);
   }
   history() {
     let historyCalcTree = document.createElement("p");
     historyCalcTree.className = "historyCalcTree";
     historyAll.appendChild(historyCalcTree);
-    historyCalcTree.innerHTM = histopyList.slice(-3);
+    historyCalcTree.innerHTML = arr;
+    // historyCalcTree.innerHTM = histopyList.slice(-3);
     alert('Немного не поняла как с массивами работать')
   }
   display() {
@@ -115,7 +117,8 @@ const currentOperandBtn = document.getElementById('current_operand');
 const calculator = new Calculator(prevOperandBtn, currentOperandBtn);
 
 let historyAll = document.getElementById('history');
-let histopyList = [document.getElementsByClassName('historyCalc')];
+let histopyList = document.getElementsByClassName('historyCalc');
+let arr = [];
 
 let resultat;
 
