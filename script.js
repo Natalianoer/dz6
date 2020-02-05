@@ -1,7 +1,8 @@
 class Calculator {
-  constructor(prevOperandBtn, currentOperandBtn) {
+  constructor(prevOperandBtn, currentOperandBtn, historyText) {
     this.prevOperandBtn = prevOperandBtn;
     this.currentOperandBtn = currentOperandBtn;
+    this.historyText = historyText;
     this.clear();
   }
   clear() {
@@ -15,6 +16,7 @@ class Calculator {
   addNumbers(numbers) {
     if (numbers === '.' && this.currentOperand.includes('.')) return
      this.currentOperand = this.currentOperand.toString() + numbers.toString();
+     this.historyText = this.prevOperand + '  '  + this.currentOperand + '  ';
   }
   choiceOperation(operation) {
     if (this.currentOperand === '') return
@@ -28,7 +30,6 @@ class Calculator {
   result() {
     const prev = parseFloat(this.prevOperand);
     const current = parseFloat(this.currentOperand);
-    //if (isNaN(prev) || isNaN(current)) return
     switch (this.operation) {
       case '+':
         if (((prev == 0.1) && (current == 0.2)) || ((current == 0.1) && (prev == 0.2))) {
@@ -74,12 +75,27 @@ class Calculator {
       case 'n!':
         resultat = factorial(prev);
         break;
+      case 'x^y':
+        resultat = pow(prev, current);
+        break;
       default:
       return
     }
     this.currentOperand = resultat;
     this.operation = undefined;
     this.prevOperand = '';
+    //для записи историй результатов на экран
+    let historyCalc =  document.createElement("p");
+    historyCalc.className = "historyCalc";
+    historyAll.appendChild(historyCalc);
+    historyCalc.innerHTML += this.historyText + ' = ' + resultat;
+  }
+  history() {
+    let historyCalcTree = document.createElement("p");
+    historyCalcTree.className = "historyCalcTree";
+    historyAll.appendChild(historyCalcTree);
+    historyCalcTree.innerHTM = histopyList.slice(-3);
+    alert('Немного не поняла как с массивами работать')
   }
   display() {
     this.currentOperandBtn.innerText = this.currentOperand;
@@ -92,10 +108,14 @@ const operationBtn = document.querySelectorAll('[data-operation]');
 const equallyBtn = document.querySelector('[data-equally]');
 const deleteBtn = document.querySelector('[data-delete]');
 const clearBtn = document.querySelector('[data-clear]');
+const history = document.querySelector('[data-history]');
 const prevOperandBtn = document.getElementById('prev_operand');
 const currentOperandBtn = document.getElementById('current_operand');
 
 const calculator = new Calculator(prevOperandBtn, currentOperandBtn);
+
+let historyAll = document.getElementById('history');
+let histopyList = [document.getElementsByClassName('historyCalc')];
 
 let resultat;
 
@@ -128,6 +148,10 @@ deleteBtn.addEventListener('click', () => {
   calculator.display();
 });
 
+history.addEventListener('click', () => {
+  calculator.history();
+});
+
 function factorial(n) {
   if ((n !== 1 ) && (n !== 0)) {
     return n * factorial(n - 1);
@@ -137,6 +161,10 @@ function factorial(n) {
   }
 }
 
-function pow() {
-  
+function pow(x,y) {
+  let rez = x;
+  for (let i = 1; i < y; i++) {
+    rez = rez * x;
+  }
+  return rez;
 }

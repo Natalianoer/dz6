@@ -56,9 +56,23 @@ body {
 .btn_color {
   background-color: #4682B4;
 }
-/* .delete {
-  grid-column: 2/-2;
-} */
 .zero {
   grid-column: 1/3;
+}
+.equally {
+  grid-column: 4/-2;
+}
+.history {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: 10%;
+}
+.historyCalc {
+  font-size: 30px;
+  color: blue;
+  font-weight: 700;
+}
+.historyCalc:nth-child(2n+1) {
+  color: black;
 }
