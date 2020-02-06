@@ -89,15 +89,20 @@ class Calculator {
     historyCalc.className = "historyCalc";
     historyAll.appendChild(historyCalc);
     historyCalc.innerHTML += this.historyText + ' = ' + resultat;
-    arr = arr + arr.push(historyCalc.innerHTM);
   }
   history() {
-    let historyCalcTree = document.createElement("p");
-    historyCalcTree.className = "historyCalcTree";
-    historyAll.appendChild(historyCalcTree);
-    historyCalcTree.innerHTML = arr;
-    // historyCalcTree.innerHTM = histopyList.slice(-3);
-    alert('Немного не поняла как с массивами работать')
+    let newArr = [];
+    let str = document.getElementsByClassName('historyCalc');
+    for (let i = 0; i < str.length; i++) {
+      newArr[i] = str[i].innerText;
+    }
+    let titleHistory = document.createElement("h2");
+    historyAll.appendChild(titleHistory);
+    let newArrText = document.createElement("div");
+    newArrText.className = "historyCalc";
+    historyAll.appendChild(newArrText);
+    titleHistory.innerHTML = 'Последние три  действия: ';
+    newArrText.innerText = newArr.slice(-3);
   }
   display() {
     this.currentOperandBtn.innerText = this.currentOperand;
@@ -117,8 +122,6 @@ const currentOperandBtn = document.getElementById('current_operand');
 const calculator = new Calculator(prevOperandBtn, currentOperandBtn);
 
 let historyAll = document.getElementById('history');
-let histopyList = document.getElementsByClassName('historyCalc');
-let arr = [];
 
 let resultat;
 
