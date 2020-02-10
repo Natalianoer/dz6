@@ -76,7 +76,11 @@ class Calculator {
         resultat = factorial(prev);
         break;
       case 'x^y':
-        resultat = pow(prev, current);
+        if (current == 0) {
+          resultat = 1;
+        }
+        else
+          resultat = pow(prev, current);
         break;
       default:
       return
@@ -102,7 +106,13 @@ class Calculator {
     newArrText.className = "historyCalc";
     historyAll.appendChild(newArrText);
     titleHistory.innerHTML = 'Последние три  действия: ';
-    newArrText.innerText = newArr.slice(-3);
+    let [a] = [];
+    a = newArr.slice(-3);
+    newArrText.innerText = '';
+    for (let i = 0; i < a.length; i++) {
+      newArrText.innerText += a[i] + '\r\n';
+    }
+     //newArrText.innerText = newArr.slice(-3);
   }
   display() {
     this.currentOperandBtn.innerText = this.currentOperand;
